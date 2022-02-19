@@ -37,7 +37,7 @@ const HeaderButton = (props) => (
         paddingVertical: 6,
         paddingHorizontal: 16,
       }}
-      onPress={() => setActiveTab(props.text)}
+      onPress={() => props.setActiveTab(props.text)}
     >
       <Text
         style={{
