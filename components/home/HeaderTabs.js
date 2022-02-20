@@ -9,20 +9,18 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 
-export default function HeaderTabs() {
-  const [activeTab, setActiveTab] = useState("Delivery");
-
+export default function HeaderTabs(props) {
   return (
     <View style={styles.header}>
       <HeaderButton
         text="Delivery"
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        activeTab={props.activeTab}
+        setActiveTab={props.setActiveTab}
       />
       <HeaderButton
-        text="Pick Up"
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        text="Pickup"
+        activeTab={props.activeTab}
+        setActiveTab={props.setActiveTab}
       />
     </View>
   );
