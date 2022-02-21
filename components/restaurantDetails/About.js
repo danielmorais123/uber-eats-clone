@@ -1,18 +1,30 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 
-const About = () => {
+
+
+const About = (props) => {
+  const { name, image, price, reviews, rating, categories } =
+    props.route.params;
+
+  const formattedCategories = categories.map((cat) => cat.title).join(" - ");
+
+  const description = `${formattedCategories} ${
+    price ? " - " + price : ""
+  } - ${rating} - ${reviews}`;
+
   return (
     <View>
-      <RestaurantImage />
-      <RestaurantTitle />
+      <RestaurantImage image={image} />
+      <RestaurantTitle name={name} />
+      <RestaurantDescription description={description} />
     </View>
   );
 };
 
 const RestaurantImage = (props) => (
   <Image
-    source={{ uri: "https://ychef.files.bbci.co.uk/976x549/p04tx3m6.jpg" }}
+    source={{ uri: props.image }}
     style={{
       width: "100%",
       height: 180,
@@ -21,8 +33,27 @@ const RestaurantImage = (props) => (
 );
 
 const RestaurantTitle = (props) => (
-  <Text style={{ fontSize: 29, fontWeight: "bold", marginTop: 10 }}>
-    Farmhouse kitchen thai
+  <Text
+    style={{
+      fontSize: 29,
+      fontWeight: "bold",
+      marginTop: 10,
+      marginHorizontal: 15,
+    }}
+  >
+    {props.name}
+  </Text>
+);
+
+const RestaurantDescription = (props) => (
+  <Text
+    style={{
+      fontWeight: "400",
+      marginTop: 10,
+      marginHorizontal: 15,
+    }}
+  >
+    {props.description}
   </Text>
 );
 
