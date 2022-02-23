@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
         />
       </ScrollView>
       <Divider width={1} />
-      <BottomTab />
+      <BottomTab navigation={navigation}/>
     </SafeAreaView>
   );
 }

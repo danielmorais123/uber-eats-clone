@@ -5,13 +5,34 @@ import { Divider } from "react-native-elements";
 import MenuItems from "../components/restaurantDetails/MenuItems";
 import ViewCart from "../components/restaurantDetails/ViewCart";
 
+const foods = [
+  {
+    title: "Lasagna",
+    description: "With butter lettuce,tomato and sauce bechamel",
+    price: "$13.50",
+    image: "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg",
+  },
+  {
+    title: "Pizza",
+    description: "With cheese and ham",
+    price: "$45.20",
+    image: "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg",
+  },
+  {
+    title: "Polvo",
+    description: "With Legs",
+    price: "$5.50",
+    image: "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg",
+  },
+];
+
 const RestaurantDetail = ({ route, navigation }) => {
   return (
     <View>
       <About route={route} />
       <Divider width={1.8} style={{ marginVertical: 20 }} />
-      <MenuItems restaurantName={route.params.name} />
-      <ViewCart navigation={navigation} restaurantName={route.params.name} />
+      <MenuItems restaurantName={route.params.name} foods={foods} />
+      <ViewCart navigation={navigation} />
     </View>
   );
 };

@@ -5,28 +5,9 @@ import { ScrollView } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch, useSelector } from "react-redux";
 
-const foods = [
-  {
-    title: "Lasagna",
-    description: "With butter lettuce,tomato and sauce bechamel",
-    price: "$13.50",
-    image: "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg",
-  },
-  {
-    title: "Pizza",
-    description: "With cheese and ham",
-    price: "$45.20",
-    image: "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg",
-  },
-  {
-    title: "Polvo",
-    description: "With Legs",
-    price: "$5.50",
-    image: "https://i.ytimg.com/vi/FrdumyhYaZY/maxresdefault.jpg",
-  },
-];
 
-const MenuItems = ({ restaurantName }) => {
+
+const MenuItems = ({ restaurantName, foods, hideCheckbox, marginLeft }) => {
   const dispatch = useDispatch();
   const selectedItem = (item, checkboxValue) =>
     dispatch({
@@ -45,18 +26,22 @@ const MenuItems = ({ restaurantName }) => {
     Boolean(cartItems.find((item) => item.title === food.title));
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false} >
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemStyle}>
-            <BouncyCheckbox
-              fillColor="green"
-              iconStyle={{ borderRadius: 0 }}
-              isChecked={isFoodInCart(food, cartItems)}
-              onPress={(checkboxValue) => selectedItem(food, checkboxValue)}
-            />
+            {hideCheckbox ? (
+              <></>
+            ) : (
+              <BouncyCheckbox
+                fillColor="green"
+                iconStyle={{ borderRadius: 0 }}
+                isChecked={isFoodInCart(food, cartItems)}
+                onPress={(checkboxValue) => selectedItem(food, checkboxValue)}
+              />
+            )}
             <FoodInfo food={food} />
-            <FoodImage food={food} />
+            <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
           </View>
           <Divider
             width={0.5}
@@ -77,11 +62,16 @@ const FoodInfo = (props) => (
   </View>
 );
 
-const FoodImage = (props) => (
+const FoodImage = ({ marginLeft, ...props }) => (
   <View>
     <Image
       source={{ uri: props.food.image }}
-      style={{ width: 90, height: 100, borderRadius: 8 }}
+      style={{
+        width: 90,
+        height: 100,
+        borderRadius: 8,
+        marginLeft: marginLeft,
+      }}
     />
   </View>
 );

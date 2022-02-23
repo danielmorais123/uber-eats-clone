@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-const BottomTab = () => {
+const BottomTab = ({ navigation}) => {
   return (
     <View
       style={{
@@ -16,13 +16,13 @@ const BottomTab = () => {
       <Icon name="search" text="Browse" />
       <Icon name="shopping-bag" text="Grocery" />
       <Icon name="receipt" text="Orders" />
-      <Icon name="user" text="Account" />
+      <Icon name="user" text="Account"  />
     </View>
   );
 };
 
-const Icon = (props) => (
-  <TouchableOpacity>
+const Icon = ({ navigation, ...props }) => (
+  <TouchableOpacity >
     <View>
       <FontAwesome5
         name={props.name}
